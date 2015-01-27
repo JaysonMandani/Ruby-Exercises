@@ -1,3 +1,6 @@
+require './user.rb'
+require './product.rb'
+
 jayson = User.new("Jayson", "Mandani")
 puts jayson.full_name
 jayson.add_product("apple", 1)

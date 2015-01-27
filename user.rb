@@ -6,11 +6,22 @@ class User
     @products = []
   end
 
-  def add_product name, quantity
-    product = Hash.new
-    product[:name] = name
-    product[:quantity] = quantity
-    @products << product
+  def add_product name
+    quantity = 1
+    product  = {name: name, quantity: quantity}
+
+    if @products.count > 0
+      @products.each do |p|
+        if p[:name] == name
+          p[:quantity] += 1
+        else
+          @products << product
+          p[:quantity] = quantity
+        end
+      end
+    else
+      @products << product
+    end
   end
 
   def products
@@ -18,7 +29,8 @@ class User
     @products.each do |p|
       @string << "#{p[:quantity]} #{p[:name]}"
     end
-    convert_to_sentence @string
+    @products
+    # convert_to_sentence @string
   end
 
   def full_name

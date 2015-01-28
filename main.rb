@@ -8,6 +8,8 @@ jayson.add_product("apple")
 jayson.add_product("orange")
 puts jayson.products
 
+fooooooo
+
 
 # nicole = User.new("Nicole", "Kidman")
 # puts nicole.full_name

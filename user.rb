@@ -10,16 +10,19 @@ class User
 
   def add_product product
     quantity = 1
-    item  = { name: product.product_name, quantity: quantity }
+    item  = { name: product.name, quantity: quantity }
 
-    unless @products.empty?
-      @products.index do |product_name|
-        if product_name[:name] == product.product_name
-          product_name[:quantity] += 1
-        else
-          @products << item
-        end
-      end
+    if @products.any?
+      index = @products.index { |product_hash| product_hash[:name] == product.name }
+      index ? @products.fetch(index)[:quantity] += 1 : @products << item
+
+      # @products.index do |product_hash|
+      #   if product_hash[:name] == product.name
+      #     product_hash[:quantity] += 1
+      #   else
+      #     @products << item
+      #   end
+      # end
     else
       @products << item
     end

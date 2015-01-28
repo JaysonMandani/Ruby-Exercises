@@ -1,4 +1,6 @@
 class User
+  attr_reader :quantity
+
   def initialize first_name, last_name
     @first_name = first_name
     @last_name  = last_name
@@ -6,21 +8,20 @@ class User
     @products = []
   end
 
-  def add_product name
+  def add_product product
     quantity = 1
-    product  = {name: name, quantity: quantity}
+    item  = { name: product.product_name, quantity: quantity }
 
-    if @products.count > 0
-      @products.each do |p|
-        if p[:name] == name
-          p[:quantity] += 1
+    unless @products.empty?
+      @products.index do |product_name|
+        if product_name[:name] == product.product_name
+          product_name[:quantity] += 1
         else
-          @products << product
-          p[:quantity] = quantity
+          @products << item
         end
       end
     else
-      @products << product
+      @products << item
     end
   end
 
@@ -54,5 +55,10 @@ class User
     else
       "#{products[0...-1].join(connectors[:comma])}#{connectors[:more_than_two]}#{products[-1]}"
     end
+  end
+
+private
+  def product_list
+    @products = []
   end
 end

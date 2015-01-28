@@ -3,4 +3,8 @@ class Product
     @name = name
     @description = description
   end
+
+  def product_name
+    @name
+  end
 end

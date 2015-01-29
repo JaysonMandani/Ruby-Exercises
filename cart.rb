@@ -21,8 +21,8 @@ class Cart
     @product_list.each do |p|
       @string << "#{p[:quantity]} #{p[:name]}"
     end
-    # @product_list
-    convert_to_sentence @string
+    @product_list
+    # convert_to_sentence @string
   end
 
   def convert_to_sentence products
@@ -42,6 +42,16 @@ class Cart
     else
       "#{products[0...-1].join(connectors[:comma])}#{connectors[:more_than_two]}#{products[-1]}"
     end
+  end
+
+  def products_to_sentence
+    hash_to_array.to_sentence
+  end
+
+private
+
+  def hash_to_array
+    @product_list.map { |h| "#{h[:quantity]} #{h[:name].pluralize(h[:quantity])}" }
   end
 
 end

@@ -4,30 +4,6 @@ class User
   def initialize first_name, last_name
     @first_name = first_name
     @last_name  = last_name
-    @product_list = []
-  end
-
-  def add_product product
-    if @product_list.empty? || !@product_list.any? { |hash| hash[:name] == product.name }
-      @product_list << { name: product.name, quantity: 1 }
-    else
-      index = @product_list.index { |product_hash| product_hash[:name] ==  product.name }
-      @product_list.fetch(index)[:quantity] += 1
-    end
-  end
-
-  def products
-    @product_list
-    # @string = []
-    # @products.each do |p|
-    #   @string << "#{p[:quantity]} #{p[:name]}"
-    # end
-    # @products
-    # convert_to_sentence @string
-  end
-
-  def hash_to_array
-    @product_list.map { |h| "#{h[:quantity]} #{h[:name].pluralize(h[:quantity])}" }
   end
 
   def full_name
